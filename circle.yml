@@ -13,13 +13,12 @@ jobs:
           name: Clone October
           command: |
             git clone https://github.com/octobercms/october.git
-      - run:
-          name: Install plugins
-          command: |
-            git clone -b ${CIRCLE_BRANCH} https://github.com/scottbedard/rainlab-user-api ./october/plugins/bedard/example
-            git clone https://github.com/rainlab/user-plugin.git ./october/plugins/rainlab/user
       - restore_cache:
           key: -v3-{{ checksum "october/composer.json" }}-{{ checksum "october/plugins/bedard/example/composer.lock" }}
+      # - run:
+      #     name: Clone plugins
+      #     command: |
+      #       git clone https://github.com/rainlab/user-plugin.git ./october/plugins/rainlab/user
       - run:
           name: Install dependencies
           command: |
