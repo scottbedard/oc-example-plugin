@@ -4,23 +4,24 @@ jobs:
     docker:
       - image: circleci/php:7.4-cli
     steps:
-      - run: sudo apt-get update
-      - run: sudo apt-get install libpng-dev
       - run:
-          name: Install PHP Extensions
-          command: sudo docker-php-ext-install gd
+          name: Install Packages & Extensions
+          command: |
+            sudo apt-get update
+            sudo apt-get install libpng-dev
+            sudo docker-php-ext-install gd
       - run:
           name: Clone October
           command: |
             git clone https://github.com/octobercms/october.git
+      - run:
+          name: Clone Plugins
+          command: |
+            git clone -b ${CIRCLE_BRANCH} https://github.com/${CIRCLE_PROJECT_USERNAME}/${CIRCLE_PROJECT_REPONAME} ./october/plugins/bedard/example
       - restore_cache:
           key: -v3-{{ checksum "october/composer.json" }}-{{ checksum "october/plugins/bedard/example/composer.lock" }}
-      # - run:
-      #     name: Clone plugins
-      #     command: |
-      #       git clone https://github.com/rainlab/user-plugin.git ./october/plugins/rainlab/user
       - run:
-          name: Install dependencies
+          name: Install Dependencies
           command: |
             (cd ./october && composer install)
             (cd ./october/plugins/bedard/example && composer install)
