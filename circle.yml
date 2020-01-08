@@ -35,11 +35,11 @@ jobs:
           command: |
             cd ./october/plugins/bedard/example
             phpdbg -qrr vendor/bin/phpunit -d memory_limit=512M --coverage-clover clover.xml
-      # - run:
-      #     name: Codecov
-      #     command: |
-      #       cd ./october/plugins/bedard/example
-      #       bash <(curl -s https://codecov.io/bash) -v -cF php
+      - run:
+          name: Codecov
+          command: |
+            cd ./october/plugins/bedard/example
+            bash <(curl -s https://codecov.io/bash) -v -cF php
 workflows:
   version: 2
   tests:
