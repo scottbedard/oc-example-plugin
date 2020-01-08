@@ -1,0 +1,15 @@
+{
+    "autoload": {
+        "psr-4": {
+            "Bedard\\Example\\Tests\\": "tests/"
+        }
+    },
+    "name": "bedard/example",
+    "require": {},
+    "require-dev": {
+        "fzaninotto/faker": "~1.7",
+        "mockery/mockery": "~1.0",
+        "phpunit/phpunit": "~6.5"
+    },
+    "type": "october-plugin"
+}
